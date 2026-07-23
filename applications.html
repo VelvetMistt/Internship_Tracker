@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Applications - InternPilot AI</title>
+    <link rel="stylesheet" href="/assets/styles2.css" />
+  </head>
+  <body>
+    <nav class="dashboard-nav">
+      <div class="logo">🚀 InternPilot AI</div>
+      <ul class="nav-links">
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/applications" class="active">Applications</a></li>
+        <li><a href="/companies">Companies</a></li>
+        <li><a href="/calendar">Calendar</a></li>
+        <li><a href="/analytics">Analytics</a></li>
+        <li><a href="/profile">Profile</a></li>
+      </ul>
+      <button class="btn-logout" onclick="logout()">Logout</button>
+    </nav>
+
+    <div class="dashboard-container">
+      <div class="page-header">
+        <h1>Internship Applications</h1>
+        <button class="btn" onclick="alert('Add Application Modal (Demo)')">+ Add Application</button>
+      </div>
+
+      <div class="applications-grid">
+        <div class="application-card">
+          <div class="app-header">
+            <h3>Google</h3>
+            <span class="status-badge applied">Applied</span>
+          </div>
+          <div class="app-details">
+            <p><strong>Position:</strong> Software Engineering Intern</p>
+            <p><strong>Location:</strong> Mountain View, CA</p>
+            <p><strong>Deadline:</strong> July 28, 2026</p>
+            <p><strong>Recruiter:</strong> recruit@google.com</p>
+          </div>
+          <div class="app-actions">
+            <button class="action-link">Edit</button>
+            <button class="action-link danger">Delete</button>
+          </div>
+        </div>
+
+        <div class="application-card">
+          <div class="app-header">
+            <h3>Microsoft</h3>
+            <span class="status-badge interviewing">Interviewing</span>
+          </div>
+          <div class="app-details">
+            <p><strong>Position:</strong> Cloud Engineering Intern</p>
+            <p><strong>Location:</strong> Redmond, WA</p>
+            <p><strong>Interview:</strong> August 2, 2026</p>
+            <p><strong>Recruiter:</strong> careers@microsoft.com</p>
+          </div>
+          <div class="app-actions">
+            <button class="action-link">Edit</button>
+            <button class="action-link danger">Delete</button>
+          </div>
+        </div>
+
+        <div class="application-card">
+          <div class="app-header">
+            <h3>Meta</h3>
+            <span class="status-badge offer">Offer</span>
+          </div>
+          <div class="app-details">
+            <p><strong>Position:</strong> Data Engineering Intern</p>
+            <p><strong>Location:</strong> Menlo Park, CA</p>
+            <p><strong>Offer Expires:</strong> August 15, 2026</p>
+            <p><strong>Recruiter:</strong> internships@Meta.com</p>
+          </div>
+          <div class="app-actions">
+            <button class="action-link">Edit</button>
+            <button class="action-link danger">Delete</button>
+          </div>
+        </div>
+
+        <div class="application-card">
+          <div class="app-header">
+            <h3>Amazon</h3>
+            <span class="status-badge rejected">Rejected</span>
+          </div>
+          <div class="app-details">
+            <p><strong>Position:</strong> Backend Engineer Intern</p>
+            <p><strong>Location:</strong> Seattle, WA</p>
+            <p><strong>Applied:</strong> July 10, 2026</p>
+            <p><strong>Recruiter:</strong> jobs@amazon.com</p>
+          </div>
+          <div class="app-actions">
+            <button class="action-link">Edit</button>
+            <button class="action-link danger">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>InternPilot AI © 2026 | Secure Internship Management</p>
+    </footer>
+
+    <script>
+      function checkAuth() {
+        if (!localStorage.getItem('isLoggedIn')) {
+          window.location.href = '/login';
+        }
+      }
+      function logout() {
+        localStorage.clear();
+        window.location.href = '/';
+      }
+      window.addEventListener('load', checkAuth);
+    </script>
+  </body>
+</html>

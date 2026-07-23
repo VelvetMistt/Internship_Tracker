@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard - InternPilot AI</title>
+    <link rel="stylesheet" href="/assets/styles2.css" />
+  </head>
+  <body>
+    <nav class="dashboard-nav">
+      <div class="logo">🚀 InternPilot AI</div>
+      <ul class="nav-links">
+        <li><a href="/dashboard" class="active">Dashboard</a></li>
+        <li><a href="/applications">Applications</a></li>
+        <li><a href="/companies">Companies</a></li>
+        <li><a href="/calendar">Calendar</a></li>
+        <li><a href="/analytics">Analytics</a></li>
+        <li><a href="/profile">Profile</a></li>
+      </ul>
+      <button class="btn-logout" onclick="logout()">Logout</button>
+    </nav>
+
+    <div class="dashboard-container">
+      <div class="dashboard-header">
+        <h1>Welcome back, <span id="userName">Student</span>!</h1>
+        <p>Here's your internship tracking overview</p>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="stat-card">
+          <div class="stat-icon">📝</div>
+          <div class="stat-content">
+            <h3>Total Applications</h3>
+            <p class="stat-number">8</p>
+            <span class="stat-subtitle">Active applications</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">✅</div>
+          <div class="stat-content">
+            <h3>Interviews Scheduled</h3>
+            <p class="stat-number">3</p>
+            <span class="stat-subtitle">Coming up soon</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">🎯</div>
+          <div class="stat-content">
+            <h3>Offers Received</h3>
+            <p class="stat-number">2</p>
+            <span class="stat-subtitle">Pending decisions</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">🏢</div>
+          <div class="stat-content">
+            <h3>Companies</h3>
+            <p class="stat-number">12</p>
+            <span class="stat-subtitle">In your database</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-sections">
+        <div class="section-card">
+          <h2>📊 Application Status Breakdown</h2>
+          <div class="status-breakdown">
+            <div class="status-item">
+              <span class="status-label">Applied:</span>
+              <div class="status-bar"><div class="status-fill" style="width: 50%; background: #90caf9;"></div></div>
+              <span class="status-count">4/8</span>
+            </div>
+            <div class="status-item">
+              <span class="status-label">Interviewing:</span>
+              <div class="status-bar"><div class="status-fill" style="width: 37.5%; background: #66bb6a;"></div></div>
+              <span class="status-count">3/8</span>
+            </div>
+            <div class="status-item">
+              <span class="status-label">Rejected:</span>
+              <div class="status-bar"><div class="status-fill" style="width: 12.5%; background: #ef5350;"></div></div>
+              <span class="status-count">1/8</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <h2>📅 Upcoming Deadlines</h2>
+          <div class="deadline-list">
+            <div class="deadline-item">
+              <div class="deadline-date">
+                <div class="date-day">28</div>
+                <div class="date-month">JUL</div>
+              </div>
+              <div class="deadline-info">
+                <h4>Google Internship</h4>
+                <p>Application deadline</p>
+              </div>
+            </div>
+            <div class="deadline-item">
+              <div class="deadline-date">
+                <div class="date-day">02</div>
+                <div class="date-month">AUG</div>
+              </div>
+              <div class="deadline-info">
+                <h4>Microsoft Interview</h4>
+                <p>Technical assessment due</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="quick-actions">
+        <h2>Quick Actions</h2>
+        <div class="action-buttons">
+          <a href="/applications" class="action-btn">➕ Add Application</a>
+          <a href="/companies" class="action-btn">🏢 Add Company</a>
+          <a href="/calendar" class="action-btn">📅 View Calendar</a>
+          <a href="/analytics" class="action-btn">📊 View Analytics</a>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>InternPilot AI © 2026 | Secure Internship Management</p>
+    </footer>
+
+    <script>
+      function checkAuth() {
+        if (!localStorage.getItem('isLoggedIn')) {
+          window.location.href = '/login';
+        }
+      }
+      function logout() {
+        localStorage.clear();
+        window.location.href = '/';
+      }
+      window.addEventListener('load', () => {
+        checkAuth();
+        const userName = localStorage.getItem('userName') || 'Student';
+        document.getElementById('userName').textContent = userName;
+      });
+    </script>
+  </body>
+</html>

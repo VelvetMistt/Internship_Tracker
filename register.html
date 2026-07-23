@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Register - InternPilot AI</title>
+    <link rel="stylesheet" href="/assets/styles2.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="logo">🚀 InternPilot AI</div>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/applications">Applications</a></li>
+        <li><a href="/companies">Companies</a></li>
+        <li><a href="/calendar">Calendar</a></li>
+        <li><a href="/profile">Profile</a></li>
+      </ul>
+    </nav>
+
+    <div class="auth-container">
+      <div class="auth-card">
+        <h1>Create Account</h1>
+        <p>Join InternPilot and start managing your internship journey</p>
+        <form id="registerForm">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="John Doe" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="your.email@example.com" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="••••••••" required />
+          </div>
+          <div class="form-group">
+            <label for="confirm">Confirm Password</label>
+            <input type="password" id="confirm" name="confirm" placeholder="••••••••" required />
+          </div>
+          <button type="submit" class="btn">Create Account</button>
+        </form>
+        <p class="auth-link">Already have an account? <a href="/login">Sign in</a></p>
+      </div>
+    </div>
+
+    <footer>
+      <p>InternPilot AI © 2026 | Secure Internship Management</p>
+    </footer>
+
+    <script>
+      document.getElementById('registerForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const password = document.getElementById('password').value;
+        const confirm = document.getElementById('confirm').value;
+        if (password !== confirm) {
+          alert('Passwords do not match!');
+          return;
+        }
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        localStorage.setItem('userName', name);
+        localStorage.setItem('userEmail', email);
+        localStorage.setItem('isLoggedIn', 'true');
+        window.location.href = '/dashboard';
+      });
+    </script>
+  </body>
+</html>

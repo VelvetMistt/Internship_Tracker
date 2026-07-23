@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login - InternPilot AI</title>
+    <link rel="stylesheet" href="/assets/styles2.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="logo">🚀 InternPilot AI</div>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/register">Register</a></li>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/applications">Applications</a></li>
+        <li><a href="/companies">Companies</a></li>
+        <li><a href="/calendar">Calendar</a></li>
+        <li><a href="/profile">Profile</a></li>
+      </ul>
+    </nav>
+
+    <div class="auth-container">
+      <div class="auth-card">
+        <h1>Welcome Back</h1>
+        <p>Sign in to your InternPilot account</p>
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="your.email@example.com" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="••••••••" required />
+          </div>
+          <button type="submit" class="btn">Sign In</button>
+        </form>
+        <p class="auth-link">Don't have an account? <a href="/register">Create one</a></p>
+        <p class="demo-note">Demo: Any email/password works for testing</p>
+      </div>
+    </div>
+
+    <footer>
+      <p>InternPilot AI © 2026 | Secure Internship Management</p>
+    </footer>
+
+    <script>
+      document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        localStorage.setItem('userEmail', email);
+        localStorage.setItem('isLoggedIn', 'true');
+        window.location.href = '/dashboard';
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Companies - InternPilot</title>
+    <link rel="stylesheet" href="/assets/styles2.css">
+    <style>
+        .company-header-info {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .company-logo {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #4caf50, #66bb6a);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+
+        .company-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .company-meta-row {
+            display: flex;
+            gap: 1rem;
+            color: #90a4ae;
+            font-size: 0.95rem;
+        }
+
+        .company-meta-row span:first-child {
+            color: #b0bec5;
+            font-weight: 600;
+        }
+
+        .add-button-section {
+            margin-bottom: 2rem;
+        }
+
+        .add-btn {
+            padding: 0.75rem 2rem;
+            background: linear-gradient(45deg, #4caf50, #66bb6a);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .add-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(76, 175, 80, 0.3);
+        }
+
+        .company-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            padding: 1rem;
+            background: rgba(76, 175, 80, 0.05);
+            border-radius: 8px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            color: #4caf50;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .stat-label {
+            color: #90a4ae;
+            margin-top: 0.3rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="dashboard-nav">
+        <div class="logo">🎯 InternPilot</div>
+        <ul class="nav-links">
+            <li><a href="/dashboard">📊 Dashboard</a></li>
+            <li><a href="/applications">📋 Applications</a></li>
+            <li><a href="/companies" class="active">🏢 Companies</a></li>
+            <li><a href="/calendar">📅 Calendar</a></li>
+            <li><a href="/analytics">📈 Analytics</a></li>
+            <li><a href="/profile">👤 Profile</a></li>
+        </ul>
+        <button class="btn-logout" onclick="logout()">🚪 Logout</button>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="dashboard-container">
+        <div class="page-header">
+            <div>
+                <h1>Companies</h1>
+                <p>Manage and track companies you're interested in</p>
+            </div>
+        </div>
+
+        <!-- Company Stats -->
+        <div class="company-stats">
+            <div class="stat-item">
+                <div class="stat-value">12</div>
+                <div class="stat-label">Total Companies</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">8</div>
+                <div class="stat-label">Applied</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">3</div>
+                <div class="stat-label">In Process</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">1</div>
+                <div class="stat-label">Offer Stage</div>
+            </div>
+        </div>
+
+        <!-- Add Company Button -->
+        <div class="add-button-section">
+            <button class="add-btn" onclick="alert('Open company creation form')">+ Add Company</button>
+        </div>
+
+        <!-- Companies Grid -->
+        <div class="companies-grid">
+            <!-- Google -->
+            <div class="company-card">
+                <div class="company-header-info">
+                    <div class="company-logo">🔍</div>
+                    <div class="company-meta">
+                        <h3 style="color: #4caf50; margin: 0;">Google</h3>
+                        <div class="company-meta-row">
+                            <span>Industry:</span>
+                            <span style="color: #90a4ae;">Technology</span>
+                        </div>
+                        <div class="company-meta-row">
+                            <span>Headquarters:</span>
+                            <span style="color: #90a4ae;">Mountain View, CA</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="company-card-info" style="margin-top: 1.5rem;">
+                    <p><strong>Website:</strong> <a href="https://google.com" target="_blank" style="color: #90caf9;">google.com</a></p>
+                    <p><strong>Applications:</strong> 2</p>
+                    <p><strong>Status:</strong> <span class="badge">Applied</span></p>
+                    <p><strong>Last Updated:</strong> Jul 25, 2024</p>
+                </div>
+                <div class="app-actions">
+                    <button class="action-link" onclick="alert('View details')">View</button>
+                    <button class="action-link" onclick="alert('Edit company')">Edit</button>
+                    <button class="action-link danger" onclick="alert('Delete company')">Delete</button>
+                </div>
+            </div>
+
+            <!-- Microsoft -->
+            <div class="company-card">
+                <div class="company-header-info">
+                    <div class="company-logo">Ⓜ️</div>
+                    <div class="company-meta">
+                        <h3 style="color: #4caf50; margin: 0;">Microsoft</h3>
+                        <div class="company-meta-row">
+                            <span>Industry:</span>
+                            <span style="color: #90a4ae;">Technology</span>
+                        </div>
+                        <div class="company-meta-row">
+                            <span>Headquarters:</span>
+                            <span style="color: #90a4ae;">Redmond, WA</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="company-card-info" style="margin-top: 1.5rem;">
+                    <p><strong>Website:</strong> <a href="https://microsoft.com" target="_blank" style="color: #90caf9;">microsoft.com</a></p>
+                    <p><strong>Applications:</strong> 1</p>
+                    <p><strong>Status:</strong> <span class="badge" style="background: rgba(102, 187, 106, 0.2); color: #66bb6a;">Interviewing</span></p>
+                    <p><strong>Last Updated:</strong> Jul 20, 2024</p>
+                </div>
+                <div class="app-actions">
+                    <button class="action-link" onclick="alert('View details')">View</button>
+                    <button class="action-link" onclick="alert('Edit company')">Edit</button>
+                    <button class="action-link danger" onclick="alert('Delete company')">Delete</button>
+                </div>
+            </div>
+
+            <!-- Meta -->
+            <div class="company-card">
+                <div class="company-header-info">
+                    <div class="company-logo">f</div>
+                    <div class="company-meta">
+                        <h3 style="color: #4caf50; margin: 0;">Meta</h3>
+                        <div class="company-meta-row">
+                            <span>Industry:</span>
+                            <span style="color: #90a4ae;">Technology</span>
+                        </div>
+                        <div class="company-meta-row">
+                            <span>Headquarters:</span>
+                            <span style="color: #90a4ae;">Menlo Park, CA</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="company-card-info" style="margin-top: 1.5rem;">
+                    <p><strong>Website:</strong> <a href="https://meta.com" target="_blank" style="color: #90caf9;">meta.com</a></p>
+                    <p><strong>Applications:</strong> 1</p>
+                    <p><strong>Status:</strong> <span class="badge" style="background: rgba(255, 167, 38, 0.2); color: #ffa726;">Offer Stage</span></p>
+                    <p><strong>Last Updated:</strong> Jul 22, 2024</p>
+                </div>
+                <div class="app-actions">
+                    <button class="action-link" onclick="alert('View details')">View</button>
+                    <button class="action-link" onclick="alert('Edit company')">Edit</button>
+                    <button class="action-link danger" onclick="alert('Delete company')">Delete</button>
+                </div>
+            </div>
+
+            <!-- Amazon -->
+            <div class="company-card">
+                <div class="company-header-info">
+                    <div class="company-logo">🔶</div>
+                    <div class="company-meta">
+                        <h3 style="color: #4caf50; margin: 0;">Amazon</h3>
+                        <div class="company-meta-row">
+                            <span>Industry:</span>
+                            <span style="color: #90a4ae;">Technology/Retail</span>
+                        </div>
+                        <div class="company-meta-row">
+                            <span>Headquarters:</span>
+                            <span style="color: #90a4ae;">Seattle, WA</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="company-card-info" style="margin-top: 1.5rem;">
+                    <p><strong>Website:</strong> <a href="https://amazon.com" target="_blank" style="color: #90caf9;">amazon.com</a></p>
+                    <p><strong>Applications:</strong> 1</p>
+                    <p><strong>Status:</strong> <span class="badge" style="background: rgba(239, 83, 80, 0.2); color: #ef5350;">Rejected</span></p>
+                    <p><strong>Last Updated:</strong> Jul 18, 2024</p>
+                </div>
+                <div class="app-actions">
+                    <button class="action-link" onclick="alert('View details')">View</button>
+                    <button class="action-link" onclick="alert('Edit company')">Edit</button>
+                    <button class="action-link danger" onclick="alert('Delete company')">Delete</button>
+                </div>
+            </div>
+
+            <!-- Apple -->
+            <div class="company-card">
+                <div class="company-header-info">
+                    <div class="company-logo">🍎</div>
+                    <div class="company-meta">
+                        <h3 style="color: #4caf50; margin: 0;">Apple</h3>
+                        <div class="company-meta-row">
+                            <span>Industry:</span>
+                            <span style="color: #90a4ae;">Technology</span>
+                        </div>
+                        <div class="company-meta-row">
+                            <span>Headquarters:</span>
+                            <span style="color: #90a4ae;">Cupertino, CA</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="company-card-info" style="margin-top: 1.5rem;">
+                    <p><strong>Website:</strong> <a href="https://apple.com" target="_blank" style="color: #90caf9;">apple.com</a></p>
+                    <p><strong>Applications:</strong> 1</p>
+                    <p><strong>Status:</strong> <span class="badge">Applied</span></p>
+                    <p><strong>Last Updated:</strong> Jul 15, 2024</p>
+                </div>
+                <div class="app-actions">
+                    <button class="action-link" onclick="alert('View details')">View</button>
+                    <button class="action-link" onclick="alert('Edit company')">Edit</button>
+                    <button class="action-link danger" onclick="alert('Delete company')">Delete</button>
+                </div>
+            </div>
+
+            <!-- Netflix -->
+            <div class="company-card">
+                <div class="company-header-info">
+                    <div class="company-logo">🎬</div>
+                    <div class="company-meta">
+                        <h3 style="color: #4caf50; margin: 0;">Netflix</h3>
+                        <div class="company-meta-row">
+                            <span>Industry:</span>
+                            <span style="color: #90a4ae;">Entertainment/Tech</span>
+                        </div>
+                        <div class="company-meta-row">
+                            <span>Headquarters:</span>
+                            <span style="color: #90a4ae;">Los Gatos, CA</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="company-card-info" style="margin-top: 1.5rem;">
+                    <p><strong>Website:</strong> <a href="https://netflix.com" target="_blank" style="color: #90caf9;">netflix.com</a></p>
+                    <p><strong>Applications:</strong> 2</p>
+                    <p><strong>Status:</strong> <span class="badge" style="background: rgba(102, 187, 106, 0.2); color: #66bb6a;">Interviewing</span></p>
+                    <p><strong>Last Updated:</strong> Jul 23, 2024</p>
+                </div>
+                <div class="app-actions">
+                    <button class="action-link" onclick="alert('View details')">View</button>
+                    <button class="action-link" onclick="alert('Edit company')">Edit</button>
+                    <button class="action-link danger" onclick="alert('Delete company')">Delete</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <h2>Quick Actions</h2>
+            <div class="action-buttons">
+                <a href="/applications" class="action-btn">View Applications</a>
+                <a href="/dashboard" class="action-btn">Back to Dashboard</a>
+                <a href="/analytics" class="action-btn">View Analytics</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 InternPilot - Your Internship Management Platform</p>
+        <p>Helping you track and manage your internship journey</p>
+    </footer>
+
+    <script>
+        // Check authentication on page load
+        window.addEventListener('load', function() {
+            if (!localStorage.getItem('isLoggedIn')) {
+                window.location.href = '/login';
+            }
+        });
+
+        // Logout function
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userName');
+            window.location.href = '/';
+        }
+
+        // Set active nav link
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentLocation = location.pathname;
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentLocation) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

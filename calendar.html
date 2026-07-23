@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar - InternPilot</title>
+    <link rel="stylesheet" href="/assets/styles2.css">
+    <style>
+        .calendar-section {
+            background: linear-gradient(135deg, rgba(26, 35, 50, 0.6), rgba(13, 27, 42, 0.6));
+            border: 1px solid rgba(76, 175, 80, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .calendar-section h2 {
+            color: #4caf50;
+            margin-bottom: 1.5rem;
+        }
+
+        .month-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .month-nav {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .month-btn {
+            background: rgba(76, 175, 80, 0.1);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            color: #4caf50;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .month-btn:hover {
+            background: rgba(76, 175, 80, 0.2);
+            border-color: #4caf50;
+        }
+
+        .month-title {
+            color: #4caf50;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .day-header {
+            text-align: center;
+            color: #90a4ae;
+            font-weight: 700;
+            padding: 1rem;
+            border-bottom: 2px solid rgba(76, 175, 80, 0.2);
+        }
+
+        .calendar-cell {
+            aspect-ratio: 1;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(76, 175, 80, 0.1);
+            border-radius: 8px;
+            padding: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            color: #90a4ae;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .calendar-cell:hover {
+            border-color: rgba(76, 175, 80, 0.4);
+            background: rgba(76, 175, 80, 0.05);
+        }
+
+        .calendar-cell.other-month {
+            color: #546e7a;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .calendar-cell.today {
+            background: rgba(76, 175, 80, 0.15);
+            border-color: #4caf50;
+            color: #4caf50;
+            font-weight: 700;
+        }
+
+        .calendar-cell.event {
+            background: rgba(102, 187, 106, 0.25);
+            border-color: #66bb6a;
+            color: #66bb6a;
+            font-weight: 700;
+        }
+
+        .calendar-cell.event.interview {
+            background: rgba(144, 202, 249, 0.25);
+            border-color: #90caf9;
+            color: #90caf9;
+        }
+
+        .calendar-cell.event.deadline {
+            background: rgba(255, 167, 38, 0.25);
+            border-color: #ffa726;
+            color: #ffa726;
+        }
+
+        .day-number {
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .event-indicator {
+            font-size: 0.7rem;
+            margin-top: 0.2rem;
+        }
+
+        .upcoming-events {
+            background: linear-gradient(135deg, rgba(26, 35, 50, 0.6), rgba(13, 27, 42, 0.6));
+            border: 1px solid rgba(76, 175, 80, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .upcoming-events h2 {
+            color: #4caf50;
+            margin-bottom: 1.5rem;
+        }
+
+        .event-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .event-item {
+            background: rgba(76, 175, 80, 0.05);
+            border-left: 4px solid #4caf50;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .event-item:hover {
+            background: rgba(76, 175, 80, 0.1);
+            transform: translateX(5px);
+        }
+
+        .event-item.interview {
+            border-left-color: #90caf9;
+            background: rgba(144, 202, 249, 0.05);
+        }
+
+        .event-item.deadline {
+            border-left-color: #ffa726;
+            background: rgba(255, 167, 38, 0.05);
+        }
+
+        .event-item.rejection {
+            border-left-color: #ef5350;
+            background: rgba(239, 83, 80, 0.05);
+        }
+
+        .event-date {
+            color: #4caf50;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .event-item.interview .event-date {
+            color: #90caf9;
+        }
+
+        .event-item.deadline .event-date {
+            color: #ffa726;
+        }
+
+        .event-item.rejection .event-date {
+            color: #ef5350;
+        }
+
+        .event-title {
+            color: #e0e0e0;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .event-description {
+            color: #90a4ae;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .event-type {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.3rem 0.8rem;
+            background: rgba(76, 175, 80, 0.2);
+            color: #4caf50;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .event-item.interview .event-type {
+            background: rgba(144, 202, 249, 0.2);
+            color: #90caf9;
+        }
+
+        .event-item.deadline .event-type {
+            background: rgba(255, 167, 38, 0.2);
+            color: #ffa726;
+        }
+
+        .event-item.rejection .event-type {
+            background: rgba(239, 83, 80, 0.2);
+            color: #ef5350;
+        }
+
+        .legend {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(76, 175, 80, 0.1);
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="dashboard-nav">
+        <div class="logo">🎯 InternPilot</div>
+        <ul class="nav-links">
+            <li><a href="/dashboard">📊 Dashboard</a></li>
+            <li><a href="/applications">📋 Applications</a></li>
+            <li><a href="/companies">🏢 Companies</a></li>
+            <li><a href="/calendar" class="active">📅 Calendar</a></li>
+            <li><a href="/analytics">📈 Analytics</a></li>
+            <li><a href="/profile">👤 Profile</a></li>
+        </ul>
+        <button class="btn-logout" onclick="logout()">🚪 Logout</button>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="dashboard-container">
+        <div class="page-header">
+            <div>
+                <h1>Interview Calendar</h1>
+                <p>Track all your interviews, deadlines, and important dates</p>
+            </div>
+        </div>
+
+        <!-- Calendar -->
+        <div class="calendar-section">
+            <div class="month-header">
+                <div class="month-nav">
+                    <button class="month-btn" onclick="previousMonth()">← Previous</button>
+                    <button class="month-btn" onclick="nextMonth()">Next →</button>
+                </div>
+                <div class="month-title" id="monthTitle">July 2024</div>
+            </div>
+
+            <div class="calendar-grid" id="calendarGrid">
+                <!-- Calendar will be generated by JavaScript -->
+            </div>
+
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background: rgba(76, 175, 80, 0.25); border: 1px solid #66bb6a;"></div>
+                    <span>Application Event</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: rgba(144, 202, 249, 0.25); border: 1px solid #90caf9;"></div>
+                    <span>Interview</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: rgba(255, 167, 38, 0.25); border: 1px solid #ffa726;"></div>
+                    <span>Deadline</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: rgba(76, 175, 80, 0.15); border: 2px solid #4caf50;"></div>
+                    <span>Today</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upcoming Events -->
+        <div class="upcoming-events">
+            <h2>Upcoming Events</h2>
+            <div class="event-list">
+                <!-- Google Interview -->
+                <div class="event-item interview">
+                    <div class="event-date">📅 July 28, 2024 · 2:00 PM</div>
+                    <div class="event-title">Google - Technical Interview Round 1</div>
+                    <div class="event-description">First round technical interview for Software Engineer position in Mountain View. Prepare for system design and coding questions.</div>
+                    <span class="event-type">Interview</span>
+                </div>
+
+                <!-- Microsoft Deadline -->
+                <div class="event-item deadline">
+                    <div class="event-date">📅 August 2, 2024 · 11:59 PM</div>
+                    <div class="event-title">Microsoft Application Deadline</div>
+                    <div class="event-description">Final deadline to submit application for the Cloud Engineer internship position. Make sure all documents are complete.</div>
+                    <span class="event-type">Deadline</span>
+                </div>
+
+                <!-- Meta Phone Screen -->
+                <div class="event-item interview">
+                    <div class="event-date">📅 August 5, 2024 · 10:00 AM</div>
+                    <div class="event-title">Meta - Phone Screen</div>
+                    <div class="event-description">Initial phone screen with Meta recruiter. Discussion will focus on background, experience, and cultural fit.</div>
+                    <span class="event-type">Interview</span>
+                </div>
+
+                <!-- Amazon Application -->
+                <div class="event-item">
+                    <div class="event-date">📅 August 10, 2024</div>
+                    <div class="event-title">Amazon Application Submitted</div>
+                    <div class="event-description">Application for AWS internship has been submitted. Status: Under Review</div>
+                    <span class="event-type">Application</span>
+                </div>
+
+                <!-- Apple On-site -->
+                <div class="event-item interview">
+                    <div class="event-date">📅 August 15, 2024 · 9:00 AM</div>
+                    <div class="event-title">Apple - On-site Interview</div>
+                    <div class="event-description">Full day on-site interview at Apple Park. Includes technical assessment, team meetings, and HR discussion.</div>
+                    <span class="event-type">Interview</span>
+                </div>
+
+                <!-- Netflix Decision -->
+                <div class="event-item">
+                    <div class="event-date">📅 August 20, 2024</div>
+                    <div class="event-title">Netflix - Expected Decision</div>
+                    <div class="event-description">Expected date for hearing back from Netflix about the second round interview result.</div>
+                    <span class="event-type">Decision Pending</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <h2>Calendar Actions</h2>
+            <div class="action-buttons">
+                <a href="/dashboard" class="action-btn">Back to Dashboard</a>
+                <a href="/applications" class="action-btn">View Applications</a>
+                <a href="/companies" class="action-btn">View Companies</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 InternPilot - Your Internship Management Platform</p>
+        <p>Stay organized with your interview schedule and deadlines</p>
+    </footer>
+
+    <script>
+        let currentMonth = new Date(2024, 6); // July 2024
+
+        // Check authentication on page load
+        window.addEventListener('load', function() {
+            if (!localStorage.getItem('isLoggedIn')) {
+                window.location.href = '/login';
+            }
+            generateCalendar();
+        });
+
+        // Logout function
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userName');
+            window.location.href = '/';
+        }
+
+        // Generate calendar
+        function generateCalendar() {
+            const year = currentMonth.getFullYear();
+            const month = currentMonth.getMonth();
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'];
+            const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+            // Update header
+            document.getElementById('monthTitle').textContent = `${monthNames[month]} ${year}`;
+
+            // Clear calendar
+            const grid = document.getElementById('calendarGrid');
+            grid.innerHTML = '';
+
+            // Add day headers
+            dayNames.forEach(day => {
+                const header = document.createElement('div');
+                header.className = 'day-header';
+                header.textContent = day;
+                grid.appendChild(header);
+            });
+
+            // Get first day and number of days
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const daysInPrevMonth = new Date(year, month, 0).getDate();
+
+            // Special events mapping
+            const events = {
+                10: ['application', 'July 10 - First application submitted'],
+                15: ['interview', 'July 15 - Interview scheduled'],
+                22: ['offer', 'July 22 - Offer received'],
+                28: ['interview', 'July 28 - Google interview'],
+                25: ['deadline', 'July 25 - Deadline approaching']
+            };
+
+            // Add previous month days
+            for (let i = firstDay - 1; i >= 0; i--) {
+                const cell = document.createElement('div');
+                cell.className = 'calendar-cell other-month';
+                cell.innerHTML = `<div class="day-number">${daysInPrevMonth - i}</div>`;
+                grid.appendChild(cell);
+            }
+
+            // Add current month days
+            const today = new Date();
+            for (let day = 1; day <= daysInMonth; day++) {
+                const cell = document.createElement('div');
+                const isToday = day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
+                
+                cell.className = 'calendar-cell';
+                if (isToday) cell.classList.add('today');
+
+                let eventClass = '';
+                let eventText = '';
+                if (events[day]) {
+                    const [type] = events[day];
+                    cell.classList.add('event', type);
+                    eventClass = `event ${type}`;
+                    eventText = '⚡';
+                }
+
+                cell.innerHTML = `
+                    <div class="day-number">${day}</div>
+                    ${eventText ? `<div class="event-indicator">${eventText}</div>` : ''}
+                `;
+                grid.appendChild(cell);
+            }
+
+            // Add next month days
+            const totalCells = grid.children.length - 7; // Subtract day headers
+            const remainingCells = 42 - totalCells; // 6 rows × 7 days
+            for (let day = 1; day <= remainingCells; day++) {
+                const cell = document.createElement('div');
+                cell.className = 'calendar-cell other-month';
+                cell.innerHTML = `<div class="day-number">${day}</div>`;
+                grid.appendChild(cell);
+            }
+        }
+
+        function previousMonth() {
+            currentMonth.setMonth(currentMonth.getMonth() - 1);
+            generateCalendar();
+        }
+
+        function nextMonth() {
+            currentMonth.setMonth(currentMonth.getMonth() + 1);
+            generateCalendar();
+        }
+
+        // Set active nav link
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentLocation = location.pathname;
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentLocation) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

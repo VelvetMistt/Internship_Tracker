@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Analytics - InternPilot AI</title>
+    <link rel="stylesheet" href="/assets/styles2.css" />
+  </head>
+  <body>
+    <nav class="dashboard-nav">
+      <div class="logo">🚀 InternPilot AI</div>
+      <ul class="nav-links">
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/applications">Applications</a></li>
+        <li><a href="/companies">Companies</a></li>
+        <li><a href="/calendar">Calendar</a></li>
+        <li><a href="/analytics" class="active">Analytics</a></li>
+        <li><a href="/profile">Profile</a></li>
+      </ul>
+      <button class="btn-logout" onclick="logout()">Logout</button>
+    </nav>
+
+    <div class="dashboard-container">
+      <div class="page-header">
+        <h1>Analytics & Insights</h1>
+        <p>Track your internship funnel performance and success metrics</p>
+      </div>
+
+      <div class="analytics-grid">
+        <div class="analytics-card">
+          <h3>📊 Application Funnel</h3>
+          <div class="funnel-chart">
+            <div class="funnel-bar" style="width: 100%; background: linear-gradient(45deg, #4caf50, #66bb6a);">
+              <span>Applied: 8</span>
+            </div>
+            <div class="funnel-bar" style="width: 75%; background: linear-gradient(45deg, #90caf9, #64b5f6);">
+              <span>Under Review: 6</span>
+            </div>
+            <div class="funnel-bar" style="width: 50%; background: linear-gradient(45deg, #ffa726, #ffb74d);">
+              <span>Interviewing: 4</span>
+            </div>
+            <div class="funnel-bar" style="width: 25%; background: linear-gradient(45deg, #4dd0e1, #80deea);">
+              <span>Offers: 2</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="analytics-card">
+          <h3>🎯 Success Metrics</h3>
+          <div class="metrics">
+            <div class="metric">
+              <span class="metric-label">Response Rate</span>
+              <span class="metric-value">75%</span>
+              <div class="metric-bar"><div style="width: 75%; background: #66bb6a;"></div></div>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Interview Rate</span>
+              <span class="metric-value">50%</span>
+              <div class="metric-bar"><div style="width: 50%; background: #90caf9;"></div></div>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Offer Rate</span>
+              <span class="metric-value">25%</span>
+              <div class="metric-bar"><div style="width: 25%; background: #ffa726;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="analytics-card">
+          <h3>📈 Timeline</h3>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-date">July 10</div>
+              <div class="timeline-event">First application submitted</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">July 15</div>
+              <div class="timeline-event">First interview scheduled</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">July 22</div>
+              <div class="timeline-event">First offer received</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">Today</div>
+              <div class="timeline-event">Evaluating opportunities</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="analytics-card">
+          <h3>📊 Top Companies</h3>
+          <div class="company-list">
+            <div class="company-item">
+              <span>Google</span>
+              <span class="badge">2 applications</span>
+            </div>
+            <div class="company-item">
+              <span>Microsoft</span>
+              <span class="badge">1 interview</span>
+            </div>
+            <div class="company-item">
+              <span>Meta</span>
+              <span class="badge">1 offer</span>
+            </div>
+            <div class="company-item">
+              <span>Amazon</span>
+              <span class="badge">Rejected</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>InternPilot AI © 2026 | Secure Internship Management</p>
+    </footer>
+
+    <script>
+      function checkAuth() {
+        if (!localStorage.getItem('isLoggedIn')) {
+          window.location.href = '/login';
+        }
+      }
+      function logout() {
+        localStorage.clear();
+        window.location.href = '/';
+      }
+      window.addEventListener('load', checkAuth);
+    </script>
+  </body>
+</html>
